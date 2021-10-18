@@ -1,10 +1,13 @@
-
-from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
-gauth = GoogleAuth()           
-drive = GoogleDrive(gauth)  
-upload_file_list = ["C:\Users\cheta\Desktop\black.jpg"]
-for upload_file in upload_file_list:
-	gfile = drive.CreateFile({'parents': [{'id': }]})
-	gfile.SetContentFile(upload_file)
-	gfile.Upload() 
+from pydrive.auth import GoogleAuth
+import os
+gauth = GoogleAuth()
+gauth.LocalWebserverAuth()       
+drive = GoogleDrive(gauth)
+path = r"C:\User\file"   
+for i in os.listdir(path):
+   
+    fil = drive.CreateFile({'title': i})
+    fil.SetContentFile(os.path.join(path, i))
+    fil.Upload()
+    fil = None
